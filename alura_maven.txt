@@ -1,0 +1,52 @@
+// gera uma estrutura básica de um novo projeto.
+mvn archetype:generate -DgroupId=br.com.alura.maven -DartifactId=produtos -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-quickstart
+
+mvn 
+ archetype:generate // comando para gerar o projeto
+ -DgroupId=br.com.alura.maven // nome da estrutura de pacote
+ -DartifactId=produtos // nome do projeto
+ -DinteractiveMode=false  // não quero que o mavem me pergunte como proceder. Gere o projeto de forma automatica
+ -DarchetypeArtifactId=maven-archetype-quickstart // gere o projeto usando a estrutura padrão 'maven-archetype-quickstart'
+ 
+// para compilar o código
+mvn compile
+
+// para limpar o diretório target
+mvn clean
+
+// gerar um jar do projeto
+mvn package
+
+// salva o jar no repositório local. Na máquina que gerou o jar.
+mvn install
+
+// gerar relatório de teste para ser lido no browser
+mvn surefire-report:report
+
+// permite executar o mvn de forma offline. 
+// Ele não checa se existe atualização na internet.
+mvn -o <goal>
+
+O maven roda as fases do ciclo de vida do projeto em sequencia.
+
+As fases são:
+validate, 
+compile, 
+test, 
+package, 
+integration-test, 
+verify, 
+install, 
+deploy
+
+Para o maven rodar uma fase, por exemplo, test, ele tem que 
+executar as fazes validate, compile antes.
+
+// comando para executar plugin que avalia código com o intuito de detectar possíveis falhas no código.
+mvn pmd:pmd
+
+// verifica novas atualizacoes das dependencias as atualiza. Perigoso!
+mvn versions:use-latest-versions
+
+// verifica novas atualizacoes das dependencias mas não as atualiza.
+mvn versions:display-dependency-updates

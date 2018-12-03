@@ -1,0 +1,166 @@
+# -> comentário
+$ -> comando git
+
+# criar um repositório entra na pasta e digita:
+
+$ git init
+
+# saber o estado atual do repositório digita:
+
+$ git status
+
+# adicionar um arquivo não rastreado ou alterado a área de commit. Ainda não é commit:
+
+$ git add <nome_do_arquivo>
+
+# commitar arquivo
+
+$ git commit -m "<digite seu comentário aqui>" <nome_do_arquivo>
+
+# para saber as versões do repositório
+
+$ git tag
+
+# para mudar de brach
+
+$ git checkout <nome_da_branch>
+
+# para criar uma nova branch
+
+$ git checkout -b <nome_da_branch_nova>
+
+# configurar a identificação da pessoal que vai fazer os commits
+# se você remover a opção --global, essa configuração fica só para o repositório
+
+$ git config --global user.name "João Carlos Fonseca"
+$ git config --global user.email "jcfonsecagit@gmail.com"
+
+#para saber o histórico dos commits que foram feitos
+
+$ git log
+
+# para saber o que foi alterado naquele repositório.
+# se vocÊ usar o parametro -p. você tem mais detalhes.
+
+$ git whatchanged [-p]
+
+# para saber quais repositórios remotos o repositório local está lincado
+
+$ git remote
+
+# para adicionar o repositório local a um remotos
+
+$ git remote add <apelido do repositorio remoto> <url do repositorio remote>
+
+# para adicionar coisas para o repositorio remoto
+
+$ git push <apelido do repositorio remoto> <nome da branch>
+
+# para baixar um repositorio de um servidor remoto
+
+$ git clone <url>
+
+# comando para listar as branches do repositório
+
+$ git branch
+
+# para criar uma nova branch
+
+$ git branch <nome da nova branch>
+
+# commitar uma nova branch para o repositório remoto
+
+$ git push -u origin <nome da nova branch>
+
+onde:
+-u -> parametro para que a nova branch remota seja lincada a branch local e assim espelhar as mudanças
+origin -> apelido para o repositório remoto
+
+# trazer dados do repositório remoto
+
+$ git pull
+
+# commando para baixar uma branch nova do repositório remoto
+(é interessante fazer um 'git pull' para saber o que tem no servidor remoto)
+
+$ git branch - t <nome da branch nova> origin/<nome da branch nova>
+
+onde:
+
+-t -> parametro para indicar que a branch nova deve ser rastreada junto com a remota
+
+
+# para saber as atualizacoes no repositorio remoto
+
+$ git fetch <nome do repositorio remoto>
+
+# pra trazer os commits de uma branch pra outra. Faz checkou na branch que se quer atualizar
+# atualizar essa branch com dados do servidor e depois faz a chamada ao comando
+
+$ git merge <nome da branch que será inserida na branch atual>
+
+# para atualizar uma branch com base em outra. (Esse é o caso de atualizar os 
+# commits que faltavam em uma branch secundária de desenvolvimento com os commits
+# da branch principal)
+# por exemplo vou atualizar a branch 'desenv' com o conteúdo da branch 'master'
+# master -> desenv
+
+$ git checkout desenvolvimento (deve estar na branch que precisa ser atualizada)
+$ git rebase master desenvolvimento
+
+
+# para voltar um arquivo para o último estado que ele tava no repositório,
+# quando ele não tinha sido addicionado as mudanças rastreadas como o "git add"
+
+$ git checkout <nome do ARQUIVO>
+
+# para tirar um arquivo da área de modificação (staged)
+# depois desse comando você pode fazer 'git checkout <nome do arquivo>'
+# para desfazer as alterações
+
+$ git reset HEAD <nome do ARQUIVO>
+
+# para desfazer uma alteração já commitada (ideal apenas a última alteração)
+
+$ git reset <identificador do commit ao qual quer voltar>
+
+# para desfazer um alteração específica de um commit específico
+
+$ git revert <indentificador do commit que se quer reverter>
+
+# ver comando git stash. permiter "salvar" alterações que não foram staged e não comitadas
+# para poder commitar mais tarde após uma correção de bug, por exemplo.
+
+$ git stash
+
+# para saber o que tá no stash
+
+$ git stash list
+
+# para recuperar o que tava no stash
+
+$ git stash apply <identificador do stash>
+
+# para remover algo que está no stash
+
+$ git stash drop
+
+# para fazer a diferença entre branches
+# assumindo que você está em uma branch secundária de desenvolvimento
+
+$ git diff <apelido do repositorio remoto>/<branch de referencia para fazer a diferença>
+
+
+# fluxo de atualização de branch
+    git checkout master: altera o local de trabalho para a branch master
+    git pull: atualiza o histórico da branch master
+    git checkout dev: altera o local de trabalho para a branch dev
+    git rebase master: atualiza o HEAD da branch dev para receber as alterações da branch master
+    git checkout master: altera o local de trabalho novamente para a branch master
+    git merge dev: mescla as alterações da branch dev na master
+    git push: envia suas alterações para o repositório remoto
+	
+# para adicionar um commit específico a uma branch específica.
+# mude para a branch que você quer receber o commit
+
+$ git cherry-pick <hash do commit>
